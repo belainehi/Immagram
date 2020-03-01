@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 //This code is from episode 4
 
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnsignup;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -35,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById (R.id.etUsername);
         etPassword = findViewById (R.id.etPassword);
         btnLogin = findViewById (R.id.btnLogin);
+        btnsignup = findViewById(R.id.btnsignup);
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick login button");
@@ -45,6 +47,15 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
 
+        });
+        btnsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick sign up button");
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+                signupUser(username, password);
+            }
         });
     }
 
@@ -63,6 +74,25 @@ public class LoginActivity extends AppCompatActivity {
                 goMainActivity();
                 Toast.makeText(LoginActivity.this,"Success!",Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+    private void signupUser (final String username, final String password){
+        ParseUser user = new ParseUser();
+        user.setUsername(username);
+        user.setPassword(password);
+
+        // Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                    loginUser(username, password);
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                    Log.e(TAG,"Sign Up failed.");
+                }
             }
         });
     }
