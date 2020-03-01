@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSubmit;
     private File photoFile;
     private String photoFileName = "photo.jpg";
+    private Button btnlogout;
 
 
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnlogout = findViewById(R.id.btnlogout);
 
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,16 @@ public class MainActivity extends AppCompatActivity {
                 savePost(description,currentUser, photoFile );
             }
         });
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+            }
+        });
     }
+
+
 
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
