@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
-        btnlogout = findViewById(R.id.btnlogout);
+        btnlogout = findViewById(R.id.btnSignOut);
 
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
@@ -78,11 +78,25 @@ public class MainActivity extends AppCompatActivity {
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+                logout();
+
             }
         });
     }
+
+    private void logout (){
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+        gotoLoginActivity();
+    }
+
+    private void gotoLoginActivity() {
+        Intent i =new Intent(this,LoginActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+
 
 
 
