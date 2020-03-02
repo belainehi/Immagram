@@ -1,6 +1,6 @@
 # Project 3 - *Immagram*
 
-**Name of your app** is a photo sharing app similar to Instagram but using Parse as its backend.
+**Immagram** is a photo sharing app similar to Instagram but using Parse as its backend.
 
 Time spent: **9** hours spent in total
 
@@ -35,7 +35,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/belainehi/Immagram/blob/master/Instagram.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
