@@ -66,10 +66,16 @@ public class MainActivity extends AppCompatActivity {
                        // Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_profile:
-                    default:
                         fragment = new ProfileFragment();
                         //Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                         break;
+
+                    case R.id.action_logout:
+                    default:
+                        fragment = null;
+                        ParseUser.logOut();
+                        ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+                        gotoLoginActivity();
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
@@ -78,5 +84,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
     }
+
+    private void gotoLoginActivity() {
+        Intent i =new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
+
 
 }
